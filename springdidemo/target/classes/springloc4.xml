@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd"
+>
+
+    <context:property-placeholder  location="applicationcontext.properties"/>
+
+    <!--<bean class="com.lmk.Computer" id="computer">
+        <property name="name" value="${name}"></property>
+        <property name="price" value="${price}"></property>
+    </bean>-->
+
+    <bean class="com.lmk.Computer" id="computer">
+       <constructor-arg value="${name}" name="name"></constructor-arg>
+       <constructor-arg value="${price}" name="price"></constructor-arg>
+    </bean>
+
+</beans>

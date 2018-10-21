@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context.xsd
+                     http://www.springframework.org/schema/aop
+                     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+
+    <!--方案一 直接在切面上加注解@Aspect 和 aop:aspectj-autoproxy 配合使用即可-->
+    <!--使用SpringAopXmlConfigTest -->
+    <!--<context:component-scan base-package="com.lmk">
+    </context:component-scan>-->
+
+
+    <bean id="targetInterface" class="com.lmk.TargetInterfaceImpl"></bean>
+    <!--测试xml 无参-->
+    <bean id="myaspect" class="com.lmk.MyAspect"></bean>
+
+    <aop:config>
+        <aop:pointcut id="point1" expression="execution(* com.lmk.TargetInterfaceImpl.targetMethod(..))"></aop:pointcut>
+        <aop:aspect id="aspect1" ref="myaspect">
+            <aop:before method="beforeMethod" pointcut-ref="point1"></aop:before>
+            <aop:before method="beforeMethod2" pointcut-ref="point1"></aop:before>
+            <aop:after-returning method="afterreturning" pointcut-ref="point1"></aop:after-returning>
+            <aop:after-throwing method="afterthrowing" pointcut-ref="point1"></aop:after-throwing>
+            <aop:around method="around" pointcut-ref="point1"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+
+
+
+</beans>
