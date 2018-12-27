@@ -1,5 +1,6 @@
 package com.lmk;
 
+import com.lmk.pointcuttest.PointCutAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,18 +17,22 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan
+@ComponentScan("com.lmk")
 public class SpringAopJavaConfig {
 
-    /*@Bean
+   /* @Bean
     public MyAspect getMyAspect(){
         return new MyAspect();
     }*/
 
-    @Bean
+    /*@Bean
     public MyAspectWithParam getMyAspectWithParam(){
         return new MyAspectWithParam();
-    }
+    }*/
 
+    @Bean
+    public PointCutAspect getPointCutAspect(){
+        return new PointCutAspect();
+    }
 
 }

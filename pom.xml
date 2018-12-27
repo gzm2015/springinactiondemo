@@ -14,6 +14,7 @@
         <module>springbeanlifecircle</module>
         <module>springmvcjavaconfigdemo</module>
         <module>springnosqldemo</module>
+        <module>springmvcparentsoncontainer</module>
     </modules>
     <packaging>pom</packaging>
 

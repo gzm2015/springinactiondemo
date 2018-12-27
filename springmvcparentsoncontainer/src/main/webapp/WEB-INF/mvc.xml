@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+
+    <!--<bean id="containerController" class="com.lmk.springmvccontainer.controller.ContainerController"></bean>-->
+    <context:component-scan base-package="com.lmk.springmvccontainer.controller"></context:component-scan>
+
+    <!--同时在core mvc 配置service时 使用的是 mvc中的配置  当注释掉mvc中的service使用的是core中的servcie 但此时aop失效-->
+    <!--<bean id="containerInterface" class="com.lmk.springmvccontainer.service.ContainerInterfaceImpl">
+        <property name="name" value="dispatcherservlet"></property>
+    </bean>-->
+
+    <!--<aop:config>
+        <aop:pointcut id="aoppointcut"  expression="execution(* com.lmk..testAop(..))"/>
+        <aop:aspect id="aopaspect" ref="aopAdvice">
+            <aop:before method="advice" pointcut-ref="aoppointcut"></aop:before>
+        </aop:aspect>
+    </aop:config>-->
+
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <value>
+                /index.html=containerController
+            </value>
+        </property>
+    </bean>
+
+    <!--mvc:annotation-driven没啥用除非想用Jackson支持Json-->
+    <!--<mvc:annotation-driven />-->
+
+    <!--vierresolver-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/"/>
+      <property name="suffix" value=".jsp"/>
+      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    </bean>
+</beans>

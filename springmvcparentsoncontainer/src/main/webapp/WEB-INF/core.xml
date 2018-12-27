@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <!--dataSource-->
+    
+    <!--transaction-->
+
+    <!--aop-->
+
+    <!--service-->
+    <!--<context:component-scan base-package="com.lmk.springmvccontainer.service"/>-->
+
+
+    <bean id="aopAdvice" class="com.lmk.springmvccontainer.util.AopAdvice"/>
+
+
+    <bean id="containerInterface" class="com.lmk.springmvccontainer.service.ContainerInterfaceImpl">
+        <property name="name" value="contextloadlistener"></property>
+    </bean>
+
+    <!--core aop mvc service only  aop失败-->
+    <!--core aop core.mvc service both  aop失败 使用的是mvc的servcie-->
+    <aop:config>
+        <aop:pointcut id="aoppointcut"  expression="execution(* com.lmk..testAop(..))"/>
+        <aop:aspect id="aopaspect" ref="aopAdvice">
+            <aop:before method="advice" pointcut-ref="aoppointcut"></aop:before>
+        </aop:aspect>
+    </aop:config>
+    <!--<bean id="minstrel" class="com.lmk.springmvccontainer.util.AopAdvice"></bean>
+    <aop:config>
+        <aop:aspect ref="minstrel">
+            <aop:pointcut expression="execution(* *.test(..))" id="say"/>
+            <aop:before pointcut-ref="say" method="singBeforeSay"/>
+            <aop:after pointcut-ref="say" method="singAfterSay"/>
+        </aop:aspect>
+    </aop:config>-->
+
+</beans>
